@@ -606,14 +606,16 @@ open class DefaultPageCreator(
                 styles = setOf(ContentStyle.RowTitle),
                 extra = extra
             )
-            sourceSetDependentHint(props.dri, props.sourceSets, kind = ContentKind.SourceSetDependentHint, extra = extra) {
+            sourceSetDependentHint(
+                props.dri,
+                props.sourceSets,
+                kind = ContentKind.SourceSetDependentHint,
+                extra = extra
+            ) {
 
                 props.forEach {
-                    val propExtra = if(it.isExtension()) mainExtra + SimpleAttr.togglableTarget("Extensions") else mainExtra
-                    group(styles =  mainStyles + TextStyle.Block, extra = propExtra) {
-                        +buildSignature(it)
-                        contentForBrief(it, propExtra)
-                    }
+                    +buildSignature(it)
+                    contentForBrief(it)
                 }
             }
         }
